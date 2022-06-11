@@ -1,0 +1,21 @@
+SET SERVEROUTPUT ON
+DECLARE
+	CURSOR DATE_CURSOR(JOIN_DATE DATE) IS
+	SELECT employee_id,last_name,hire_date FROM employees
+	WHERE HIRE_DATE >JOIN_DATE ;
+	EMPNO   employees.employee_id%TYPE;
+	ENAME   employees.last_name%TYPE;
+      	HIREDATE employees.hire_date%TYPE;
+	HDATE employees.hire_date%TYPE :=   '&P_HIREDATE';
+BEGIN
+ 	OPEN DATE_CURSOR(HDATE);
+	LOOP
+		FETCH DATE_CURSOR INTO EMPNO,ENAME,HIREDATE;
+        		EXIT WHEN DATE_CURSOR%NOTFOUND;
+		DBMS_OUTPUT.PUT_LINE (EMPNO || ' ' || ENAME || ' ' ||  HIREDATE);
+        END LOOP;
+ END;
+/
+SET SERVEROUTPUT OFF; 
+  
+	

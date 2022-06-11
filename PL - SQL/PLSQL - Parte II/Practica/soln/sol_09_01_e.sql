@@ -1,0 +1,3 @@
+BEGIN
+ greet;
+END;
